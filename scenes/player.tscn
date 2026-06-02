@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b7pf2t0g7l2ce"]
 
 [ext_resource type="Texture2D" uid="uid://y2vwhw103agw" path="res://assets/fantasy_pack/Player/Player.png" id="1_3vyb7"]
+[ext_resource type="Script" uid="uid://c3tiohpq5qdfw" path="res://scripts/player.gd" id="1_g2els"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
 atlas = ExtResource("1_3vyb7")
@@ -68,27 +69,27 @@ region = Rect2(96, 288, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fulsm"]
 atlas = ExtResource("1_3vyb7")
-region = Rect2(0, 96, 32, 32)
+region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4r5pv"]
 atlas = ExtResource("1_3vyb7")
-region = Rect2(32, 96, 32, 32)
+region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_60mlk"]
 atlas = ExtResource("1_3vyb7")
-region = Rect2(64, 96, 32, 32)
+region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i4ail"]
 atlas = ExtResource("1_3vyb7")
-region = Rect2(96, 96, 32, 32)
+region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a38lo"]
 atlas = ExtResource("1_3vyb7")
-region = Rect2(128, 96, 32, 32)
+region = Rect2(128, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4ni07"]
 atlas = ExtResource("1_3vyb7")
-region = Rect2(160, 96, 32, 32)
+region = Rect2(160, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l71n6"]
 atlas = ExtResource("1_3vyb7")
@@ -420,8 +421,10 @@ animations = [{
 }]
 
 [node name="Player" type="CharacterBody2D" unique_id=1439520058]
+script = ExtResource("1_g2els")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=36824348]
+position = Vector2(1, 0)
+scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_ha2mi")
-animation = &"attack_right"
-frame_progress = 0.47969443
+animation = &"idle_right"
