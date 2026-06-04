@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://bc70pusumnp37"]
 
 [ext_resource type="Texture2D" uid="uid://ba5re5jrlvx2y" path="res://assets/fantasy_pack/Enemies/Slime_Green.png" id="1_371uh"]
+[ext_resource type="Script" uid="uid://du7edfriso05r" path="res://scripts/slime.gd" id="1_p2gj0"]
+[ext_resource type="AudioStream" uid="uid://vnbk3jmjpx5r" path="res://assets/sounds/slime_damage.wav" id="3_n6pvg"]
+[ext_resource type="PackedScene" uid="uid://c3uiq5jywoa3e" path="res://scenes/health_bar.tscn" id="4_pjw23"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p2gj0"]
 atlas = ExtResource("1_371uh")
@@ -138,7 +141,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_tyl0w")
 }],
-"loop": true,
+"loop": false,
 "name": &"die",
 "speed": 8.0
 }, {
@@ -163,14 +166,34 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_371uh"]
 size = Vector2(18, 15.5)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_371uh"]
+radius = 150.0
+
 [node name="Slime" type="CharacterBody2D" unique_id=1293332429]
 scale = Vector2(2, 2)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_p2gj0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1814767950]
 sprite_frames = SubResource("SpriteFrames_24adn")
-animation = &"idle"
+animation = &"die"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1410490992]
 position = Vector2(0, -0.25)
 shape = SubResource("RectangleShape2D_371uh")
+
+[node name="Sight" type="Area2D" parent="." unique_id=196670839]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sight" unique_id=709987761]
+shape = SubResource("CircleShape2D_371uh")
+
+[node name="TakeDamage" type="AudioStreamPlayer2D" parent="." unique_id=751240881]
+stream = ExtResource("3_n6pvg")
+
+[node name="HealthBar" parent="." unique_id=956352664 instance=ExtResource("4_pjw23")]
+position = Vector2(-9, 9)
+
+[connection signal="body_entered" from="Sight" to="." method="_on_sight_body_entered"]
+[connection signal="body_exited" from="Sight" to="." method="_on_sight_body_exited"]
