@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://y2vwhw103agw" path="res://assets/fantasy_pack/Player/Player.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://c3tiohpq5qdfw" path="res://scripts/player.gd" id="1_g2els"]
+[ext_resource type="AudioStream" uid="uid://c4lk18ihl7hue" path="res://assets/sounds/sword_swing.wav" id="3_qhqgy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
 atlas = ExtResource("1_3vyb7")
@@ -226,7 +227,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_qlg0r")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack_down",
 "speed": 10.0
 }, {
@@ -243,7 +244,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ur7pv")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack_right",
 "speed": 10.0
 }, {
@@ -260,7 +261,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jej6c")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack_up",
 "speed": 10.0
 }, {
@@ -420,6 +421,9 @@ animations = [{
 "speed": 7.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qhqgy"]
+size = Vector2(60, 60)
+
 [node name="Player" type="CharacterBody2D" unique_id=1439520058]
 script = ExtResource("1_g2els")
 
@@ -427,4 +431,22 @@ script = ExtResource("1_g2els")
 position = Vector2(1, 0)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_ha2mi")
-animation = &"idle_right"
+animation = &"attack_right"
+frame = 1
+
+[node name="SwingSword" type="AudioStreamPlayer2D" parent="." unique_id=2094783149]
+position = Vector2(1, 0)
+scale = Vector2(4, 4)
+stream = ExtResource("3_qhqgy")
+pitch_scale = 3.0
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=853429865]
+position = Vector2(31, -2)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1057560572]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_qhqgy")
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
