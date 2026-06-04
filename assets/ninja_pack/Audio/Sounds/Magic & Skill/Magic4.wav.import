@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dbsk87j5b4yet"
+path="res://.godot/imported/Magic4.wav-7d5fe561bea63a5ad712e90ec6c2edd7.sample"
+
+[deps]
+
+source_file="res://assets/ninja_pack/Audio/Sounds/Magic & Skill/Magic4.wav"
+dest_files=["res://.godot/imported/Magic4.wav-7d5fe561bea63a5ad712e90ec6c2edd7.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
