@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://b7pf2t0g7l2ce" path="res://scenes/player.tscn" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://bc70pusumnp37" path="res://scenes/slime.tscn" id="2_0wfyh"]
+[ext_resource type="PackedScene" uid="uid://dhud0taleskai1" path="res://scenes/hud.tscn" id="3_hudscene"]
 
 [node name="Main" type="Node2D" unique_id=277545477]
 
@@ -10,3 +11,5 @@ position = Vector2(589, 314)
 
 [node name="Slime" parent="." unique_id=1293332429 instance=ExtResource("2_0wfyh")]
 position = Vector2(823, 358)
+
+[node name="HUD" parent="." instance=ExtResource("3_hudscene")]
