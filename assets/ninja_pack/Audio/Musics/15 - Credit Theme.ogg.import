@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c6vdl7e33ov1t"
+path="res://.godot/imported/15 - Credit Theme.ogg-5e3cfecaf1ad9151a2c3f8c8ad8c809e.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/ninja_pack/Audio/Musics/15 - Credit Theme.ogg"
+dest_files=["res://.godot/imported/15 - Credit Theme.ogg-5e3cfecaf1ad9151a2c3f8c8ad8c809e.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
