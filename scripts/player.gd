@@ -1,19 +1,30 @@
 extends CharacterBody2D
 
 const SPEED = 300.0
+const MAX_HEALTH: int = 100
 var last_direction: Vector2 = Vector2.RIGHT
 var is_attacking = false
 var hitbox_offset: Vector2
 var strength: int = 20
+var health: int = MAX_HEALTH
 
 @onready var animated_sprite_2d = $AnimatedSprite2D
 @onready var swing_sword: AudioStreamPlayer2D = $SwingSword
 @onready var hitbox: Area2D = $Hitbox
 
 func _ready() -> void:
-	
-	# Initialize hitbox offset
 	hitbox_offset = hitbox.position
+	add_to_group("player")
+	GameState.set_health(health, MAX_HEALTH)
+
+func take_damage(damage: int) -> void:
+	health = max(0, health - damage)
+	GameState.set_health(health, MAX_HEALTH)
+	if health <= 0:
+		_die()
+
+func _die() -> void:
+	pass
 
 func _physics_process(_delta: float) -> void:
 	# Disable hitbox until an attack is triggered
