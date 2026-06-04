@@ -8,6 +8,10 @@
 
 config_version=5
 
+[autoload]
+
+GameState="*res://scripts/game_state.gd"
+
 [application]
 
 config/name="tales-of-kaique"
