@@ -3,6 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://y2vwhw103agw" path="res://assets/fantasy_pack/Player/Player.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://c3tiohpq5qdfw" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="AudioStream" uid="uid://c4lk18ihl7hue" path="res://assets/sounds/sword_swing.wav" id="3_qhqgy"]
+[ext_resource type="AudioStream" uid="uid://cphurt8bitpl05" path="res://assets/sounds/player_hurt.wav" id="4_phurt"]
+[ext_resource type="AudioStream" uid="uid://cpdth8bitpl060" path="res://assets/sounds/player_death.wav" id="5_pdth"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
 atlas = ExtResource("1_3vyb7")
@@ -440,11 +442,20 @@ animation = &"attack_right"
 position = Vector2(2.5, 19)
 shape = SubResource("RectangleShape2D_dqkch")
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = false
+
 [node name="SwingSword" type="AudioStreamPlayer2D" parent="." unique_id=2094783149]
 position = Vector2(1, 0)
 scale = Vector2(4, 4)
 stream = ExtResource("3_qhqgy")
 pitch_scale = 3.0
+
+[node name="HurtSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_phurt")
+
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_pdth")
 
 [node name="Hitbox" type="Area2D" parent="." unique_id=853429865]
 position = Vector2(31, -2)
