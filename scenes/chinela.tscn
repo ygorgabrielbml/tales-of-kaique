@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://c7x68ktk2fovk"]
+
+[ext_resource type="Script" uid="uid://bprojectile0017" path="res://scripts/projectile.gd" id="1_proj"]
+[ext_resource type="Texture2D" uid="uid://bots220qxypot" path="res://assets/fantasy_pack/Animals/chinela.png" id="2_slip"]
+
+[sub_resource type="CircleShape2D" id="cs_slip"]
+radius = 12.0
+
+[node name="Chinela" type="Area2D"]
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("1_proj")
+face_direction = false
+spin_speed = 14.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(3, 3)
+texture = ExtResource("2_slip")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("cs_slip")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
