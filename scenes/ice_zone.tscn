@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://438mq1hov6hs"]
+
+[ext_resource type="Script" uid="uid://bicezonescript17" path="res://scripts/ice_zone.gd" id="1_z"]
+[ext_resource type="Texture2D" uid="uid://dicezonetex001" path="res://assets/fantasy_pack/Tiles/ice_zone.png" id="2_z"]
+
+[sub_resource type="CircleShape2D" id="cs"]
+radius = 56.0
+
+[node name="IceZone" type="Area2D"]
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("1_z")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("2_z")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("cs")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

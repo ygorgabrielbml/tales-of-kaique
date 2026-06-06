@@ -26,6 +26,7 @@ func _ready() -> void:
 	layer = 10
 	_build_ui()
 	_connect_signals()
+	_on_gold_changed(GameState.gold)
 	_find_player.call_deferred()
 
 func _input(event: InputEvent) -> void:

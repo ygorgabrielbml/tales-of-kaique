@@ -1,15 +1,27 @@
 [gd_scene format=3 uid="uid://cdrllj5d0ei64"]
 
 [ext_resource type="PackedScene" uid="uid://b7pf2t0g7l2ce" path="res://scenes/player.tscn" id="1_o5qli"]
-[ext_resource type="PackedScene" uid="uid://bc70pusumnp37" path="res://scenes/slime.tscn" id="2_0wfyh"]
+[ext_resource type="PackedScene" uid="uid://xeojto31x86x" path="res://scenes/chicken.tscn" id="2_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://dhud0taleskai1" path="res://scenes/hud.tscn" id="3_hudscene"]
+[ext_resource type="PackedScene" uid="uid://detnanscene001" path="res://scenes/etnan.tscn" id="4_etnan"]
+[ext_resource type="PackedScene" uid="uid://djosescene0001" path="res://scenes/jose.tscn" id="5_jose"]
+[ext_resource type="PackedScene" uid="uid://dsocorroscene01" path="res://scenes/socorro.tscn" id="6_socorro"]
 
 [node name="Main" type="Node2D" unique_id=277545477]
 
 [node name="Player" parent="." unique_id=1439520058 instance=ExtResource("1_o5qli")]
 position = Vector2(589, 314)
 
-[node name="Slime" parent="." unique_id=1293332429 instance=ExtResource("2_0wfyh")]
+[node name="Chicken" parent="." unique_id=1293332429 instance=ExtResource("2_0wfyh")]
 position = Vector2(823, 358)
+
+[node name="Etnan" parent="." instance=ExtResource("4_etnan")]
+position = Vector2(300, 200)
+
+[node name="Jose" parent="." instance=ExtResource("5_jose")]
+position = Vector2(920, 180)
+
+[node name="Socorro" parent="." instance=ExtResource("6_socorro")]
+position = Vector2(340, 470)
 
 [node name="HUD" parent="." instance=ExtResource("3_hudscene")]

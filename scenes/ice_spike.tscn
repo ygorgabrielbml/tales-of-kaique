@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://4wahwmxmnfus"]
+
+[ext_resource type="Script" uid="uid://bprojectile0017" path="res://scripts/projectile.gd" id="1_proj"]
+[ext_resource type="Texture2D" uid="uid://d0wa1hqh3fkkx" path="res://assets/ninja_pack/FX/Projectile/IceSpike.png" id="2_ice"]
+
+[sub_resource type="AtlasTexture" id="i0"]
+atlas = ExtResource("2_ice")
+region = Rect2(0, 0, 18, 10)
+
+[sub_resource type="AtlasTexture" id="i1"]
+atlas = ExtResource("2_ice")
+region = Rect2(18, 0, 18, 10)
+
+[sub_resource type="AtlasTexture" id="i2"]
+atlas = ExtResource("2_ice")
+region = Rect2(36, 0, 18, 10)
+
+[sub_resource type="AtlasTexture" id="i3"]
+atlas = ExtResource("2_ice")
+region = Rect2(54, 0, 18, 10)
+
+[sub_resource type="AtlasTexture" id="i4"]
+atlas = ExtResource("2_ice")
+region = Rect2(72, 0, 18, 10)
+
+[sub_resource type="AtlasTexture" id="i5"]
+atlas = ExtResource("2_ice")
+region = Rect2(90, 0, 18, 10)
+
+[sub_resource type="AtlasTexture" id="i6"]
+atlas = ExtResource("2_ice")
+region = Rect2(108, 0, 18, 10)
+
+[sub_resource type="AtlasTexture" id="i7"]
+atlas = ExtResource("2_ice")
+region = Rect2(126, 0, 18, 10)
+
+[sub_resource type="SpriteFrames" id="sf_ice"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("i0")
+}, {
+"duration": 1.0,
+"texture": SubResource("i1")
+}, {
+"duration": 1.0,
+"texture": SubResource("i2")
+}, {
+"duration": 1.0,
+"texture": SubResource("i3")
+}, {
+"duration": 1.0,
+"texture": SubResource("i4")
+}, {
+"duration": 1.0,
+"texture": SubResource("i5")
+}, {
+"duration": 1.0,
+"texture": SubResource("i6")
+}, {
+"duration": 1.0,
+"texture": SubResource("i7")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 16.0
+}]
+
+[sub_resource type="CircleShape2D" id="cs_ice"]
+radius = 11.0
+
+[node name="IceSpike" type="Area2D"]
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("1_proj")
+face_direction = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(3.5, 3.5)
+sprite_frames = SubResource("sf_ice")
+animation = &"fly"
+autoplay = "fly"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("cs_ice")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
