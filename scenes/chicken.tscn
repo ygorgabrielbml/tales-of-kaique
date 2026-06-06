@@ -1,0 +1,127 @@
+[gd_scene format=3 uid="uid://xeojto31x86x"]
+
+[ext_resource type="Texture2D" uid="uid://b6lrjxqhgeq6h" path="res://assets/fantasy_pack/Animals/Chicken/Chicken.png" id="1_chick"]
+[ext_resource type="Script" uid="uid://b8nchkscript7q" path="res://scripts/chicken.gd" id="2_chick"]
+[ext_resource type="AudioStream" uid="uid://cidle8bitchk01" path="res://assets/sounds/chicken_idle.wav" id="3_idle"]
+[ext_resource type="AudioStream" uid="uid://catk8bitchk020" path="res://assets/sounds/chicken_attack.wav" id="4_atk"]
+[ext_resource type="AudioStream" uid="uid://churt8bitchk03" path="res://assets/sounds/chicken_hurt.wav" id="5_hurt"]
+[ext_resource type="AudioStream" uid="uid://cdth8bitchk040" path="res://assets/sounds/chicken_death.wav" id="6_death"]
+[ext_resource type="PackedScene" uid="uid://c3uiq5jywoa3e" path="res://scenes/health_bar.tscn" id="7_chick"]
+[ext_resource type="PackedScene" uid="uid://dcoinscene0001" path="res://scenes/coin.tscn" id="8_coin"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c0"]
+atlas = ExtResource("1_chick")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c1"]
+atlas = ExtResource("1_chick")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c2"]
+atlas = ExtResource("1_chick")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c3"]
+atlas = ExtResource("1_chick")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_chick"]
+animations = [{
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_c0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c1")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c3")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 9.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c3")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_c1")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 14.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c3")
+}],
+"loop": false,
+"name": &"die",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_chick"]
+size = Vector2(16, 14)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_chick"]
+radius = 60.0
+
+[node name="Chicken" type="CharacterBody2D"]
+scale = Vector2(3.5, 3.5)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("2_chick")
+gold_drop = 4
+coin_scene = ExtResource("8_coin")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_chick")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_chick")
+
+[node name="Sight" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sight"]
+shape = SubResource("CircleShape2D_chick")
+
+[node name="IdleSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_idle")
+
+[node name="AttackSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_atk")
+
+[node name="HurtSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_hurt")
+
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_death")
+
+[node name="HealthBar" parent="." instance=ExtResource("7_chick")]
+position = Vector2(-9, -14)
+
+[connection signal="body_entered" from="Sight" to="." method="_on_sight_body_entered"]
+[connection signal="body_exited" from="Sight" to="." method="_on_sight_body_exited"]
