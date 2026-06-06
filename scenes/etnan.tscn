@@ -1,0 +1,154 @@
+[gd_scene load_steps=30 format=3 uid="uid://detnanscene001"]
+
+[ext_resource type="Script" uid="uid://benemybase0017" path="res://scripts/enemy.gd" id="1_e"]
+[ext_resource type="Texture2D" uid="uid://chmrqank5eeke" path="res://assets/fantasy_pack/Enemies/etnan.png" id="2_s"]
+[ext_resource type="PackedScene" uid="uid://c3uiq5jywoa3e" path="res://scenes/health_bar.tscn" id="3_hb"]
+[ext_resource type="AudioStream" uid="uid://chumanhurt8bit" path="res://assets/sounds/human_hurt_8bit.wav" id="4_hurt"]
+[ext_resource type="AudioStream" uid="uid://chumandeath8bit" path="res://assets/sounds/human_death_8bit.wav" id="5_death"]
+[ext_resource type="PackedScene" uid="uid://dcoinscene0001" path="res://scenes/coin.tscn" id="6_coin"]
+
+[sub_resource type="AtlasTexture" id="idle_0"]
+atlas = ExtResource("2_s")
+region = Rect2(0, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="idle_1"]
+atlas = ExtResource("2_s")
+region = Rect2(32, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="idle_2"]
+atlas = ExtResource("2_s")
+region = Rect2(64, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="idle_3"]
+atlas = ExtResource("2_s")
+region = Rect2(96, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="idle_4"]
+atlas = ExtResource("2_s")
+region = Rect2(128, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="idle_5"]
+atlas = ExtResource("2_s")
+region = Rect2(160, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="walk_0"]
+atlas = ExtResource("2_s")
+region = Rect2(0, 96, 32, 32)
+[sub_resource type="AtlasTexture" id="walk_1"]
+atlas = ExtResource("2_s")
+region = Rect2(32, 96, 32, 32)
+[sub_resource type="AtlasTexture" id="walk_2"]
+atlas = ExtResource("2_s")
+region = Rect2(64, 96, 32, 32)
+[sub_resource type="AtlasTexture" id="walk_3"]
+atlas = ExtResource("2_s")
+region = Rect2(96, 96, 32, 32)
+[sub_resource type="AtlasTexture" id="walk_4"]
+atlas = ExtResource("2_s")
+region = Rect2(128, 96, 32, 32)
+[sub_resource type="AtlasTexture" id="walk_5"]
+atlas = ExtResource("2_s")
+region = Rect2(160, 96, 32, 32)
+[sub_resource type="AtlasTexture" id="atk_0"]
+atlas = ExtResource("2_s")
+region = Rect2(0, 192, 32, 32)
+[sub_resource type="AtlasTexture" id="atk_1"]
+atlas = ExtResource("2_s")
+region = Rect2(32, 192, 32, 32)
+[sub_resource type="AtlasTexture" id="atk_2"]
+atlas = ExtResource("2_s")
+region = Rect2(64, 192, 32, 32)
+[sub_resource type="AtlasTexture" id="atk_3"]
+atlas = ExtResource("2_s")
+region = Rect2(96, 192, 32, 32)
+[sub_resource type="AtlasTexture" id="die_0"]
+atlas = ExtResource("2_s")
+region = Rect2(0, 288, 32, 32)
+[sub_resource type="AtlasTexture" id="die_1"]
+atlas = ExtResource("2_s")
+region = Rect2(32, 288, 32, 32)
+[sub_resource type="AtlasTexture" id="die_2"]
+atlas = ExtResource("2_s")
+region = Rect2(64, 288, 32, 32)
+[sub_resource type="AtlasTexture" id="die_3"]
+atlas = ExtResource("2_s")
+region = Rect2(96, 288, 32, 32)
+
+[sub_resource type="SpriteFrames" id="sf"]
+animations = [{
+"frames": [{"duration": 1.0, "texture": SubResource("atk_0")}, {"duration": 1.0, "texture": SubResource("atk_1")}, {"duration": 1.0, "texture": SubResource("atk_2")}, {"duration": 1.0, "texture": SubResource("atk_3")}],
+"loop": false,
+"name": &"attack",
+"speed": 10.0
+}, {
+"frames": [{"duration": 1.0, "texture": SubResource("die_0")}, {"duration": 1.0, "texture": SubResource("die_1")}, {"duration": 1.0, "texture": SubResource("die_2")}, {"duration": 1.0, "texture": SubResource("die_3")}],
+"loop": false,
+"name": &"die",
+"speed": 7.0
+}, {
+"frames": [{"duration": 1.0, "texture": SubResource("idle_0")}, {"duration": 1.0, "texture": SubResource("idle_1")}, {"duration": 1.0, "texture": SubResource("idle_2")}, {"duration": 1.0, "texture": SubResource("idle_3")}, {"duration": 1.0, "texture": SubResource("idle_4")}, {"duration": 1.0, "texture": SubResource("idle_5")}],
+"loop": true,
+"name": &"idle",
+"speed": 6.0
+}, {
+"frames": [{"duration": 1.0, "texture": SubResource("walk_0")}, {"duration": 1.0, "texture": SubResource("walk_1")}, {"duration": 1.0, "texture": SubResource("walk_2")}, {"duration": 1.0, "texture": SubResource("walk_3")}, {"duration": 1.0, "texture": SubResource("walk_4")}, {"duration": 1.0, "texture": SubResource("walk_5")}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="rect"]
+size = Vector2(38, 78)
+
+[sub_resource type="CircleShape2D" id="circ"]
+radius = 240.0
+
+[node name="Etnan" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_e")
+max_health = 100
+move_speed = 90.0
+can_move = true
+attack_range = 130.0
+attack_cooldown = 1.2
+attack_damage = 14
+lunge_distance = 28.0
+gold_drop = 70
+coin_count = 3
+coin_scene = ExtResource("6_coin")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(4, 4)
+sprite_frames = SubResource("sf")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 14)
+shape = SubResource("rect")
+
+[node name="Sight" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sight"]
+shape = SubResource("circ")
+
+[node name="HealthBar" parent="." instance=ExtResource("3_hb")]
+scale = Vector2(2.5, 2.5)
+position = Vector2(-22, -74)
+
+[node name="NameLabel" type="Label" parent="."]
+offset_left = -48.0
+offset_top = -98.0
+offset_right = 48.0
+offset_bottom = -78.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 14
+text = "Etnan"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HurtSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_hurt")
+
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_death")
+
+[connection signal="body_entered" from="Sight" to="." method="_on_sight_body_entered"]
+[connection signal="body_exited" from="Sight" to="." method="_on_sight_body_exited"]
