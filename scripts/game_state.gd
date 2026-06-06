@@ -6,7 +6,7 @@ signal inventory_changed(slots: Array)
 signal objective_added(index: int)
 signal objective_completed(index: int)
 
-var gold: int = 0
+var gold: int = -500
 var inventory: Array[Dictionary] = []
 var objectives: Array[Dictionary] = []
 
@@ -14,7 +14,7 @@ const MAX_SLOTS: int = 16
 const HOTBAR_SIZE: int = 4
 
 func _ready() -> void:
-	add_objective("Derrotar os slimes")
+	add_objective("Derrotar as galinhas")
 	add_objective("Explorar a área")
 
 func set_health(current: int, maximum: int) -> void:
@@ -23,6 +23,12 @@ func set_health(current: int, maximum: int) -> void:
 func add_gold(amount: int) -> void:
 	gold += amount
 	gold_changed.emit(gold)
+
+func clear_debt() -> void:
+	# Wipe any outstanding debt (negative gold) back to zero.
+	if gold < 0:
+		gold = 0
+		gold_changed.emit(gold)
 
 func spend_gold(amount: int) -> bool:
 	if gold < amount:

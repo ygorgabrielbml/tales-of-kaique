@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://ch5uskt5keke"]
+
+[ext_resource type="Script" uid="uid://bcoinscript0017" path="res://scripts/coin.gd" id="1_c"]
+[ext_resource type="Texture2D" uid="uid://creak3hlnfqyj" path="res://assets/ninja_pack/Items/Treasure/GoldCoin.png" id="2_c"]
+[ext_resource type="AudioStream" uid="uid://cw7eo13tj0nqg" path="res://assets/ninja_pack/Audio/Sounds/Bonus/Coin.wav" id="3_c"]
+
+[sub_resource type="CircleShape2D" id="cs"]
+radius = 16.0
+
+[node name="Coin" type="Area2D"]
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("1_c")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(3, 3)
+texture = ExtResource("2_c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("cs")
+
+[node name="PickupSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_c")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
