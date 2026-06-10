@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://c3uiq5jywoa3e" path="res://scenes/health_bar.tscn" id="3_hb"]
 [ext_resource type="AudioStream" uid="uid://chumanhurt8bit" path="res://assets/sounds/human_hurt_8bit.wav" id="4_hurt"]
 [ext_resource type="AudioStream" uid="uid://chumandeath8bit" path="res://assets/sounds/human_death_8bit.wav" id="5_death"]
-[ext_resource type="PackedScene" uid="uid://dcoinscene0001" path="res://scenes/coin.tscn" id="6_coin"]
+[ext_resource type="AudioStream" uid="uid://bwpu6vieabmq7" path="res://assets/sounds/attack_blocked.wav" id="6_block"]
 
 [sub_resource type="AtlasTexture" id="idle_0"]
 atlas = ExtResource("2_s")
@@ -102,15 +102,13 @@ collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_e")
 max_health = 100
+invincible = true
 move_speed = 90.0
 can_move = true
 attack_range = 130.0
 attack_cooldown = 1.2
 attack_damage = 14
 lunge_distance = 28.0
-gold_drop = 70
-coin_count = 3
-coin_scene = ExtResource("6_coin")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(4, 4)
@@ -149,6 +147,9 @@ stream = ExtResource("4_hurt")
 
 [node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_death")
+
+[node name="BlockSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_block")
 
 [connection signal="body_entered" from="Sight" to="." method="_on_sight_body_entered"]
 [connection signal="body_exited" from="Sight" to="." method="_on_sight_body_exited"]
