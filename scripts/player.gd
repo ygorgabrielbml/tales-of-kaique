@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 const SPEED = 300.0
 const MAX_HEALTH: int = 100
+const DEATH_SCREEN := preload("res://scenes/death_screen.tscn")
 var last_direction: Vector2 = Vector2.RIGHT
 var is_attacking = false
 var is_dead = false
@@ -54,6 +55,11 @@ func _die() -> void:
 	animated_sprite_2d.modulate = Color.WHITE
 	animated_sprite_2d.play("dying")
 	death_sound.play()
+
+	# Death sequence overlay: black screen + "MORREU HOJE" -> cross flips -> fire,
+	# then a menu to revive (reload this scene) or quit. The overlay handles it.
+	var screen := DEATH_SCREEN.instantiate()
+	get_tree().current_scene.add_child(screen)
 
 func _physics_process(_delta: float) -> void:
 	if is_dead:

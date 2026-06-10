@@ -5,6 +5,7 @@ class_name Enemy extends CharacterBody2D
 # ice mages (José) and slipper-throwers (Socorro).
 
 @export var max_health: int = 100
+@export var invincible: bool = false         # ignores all damage, hides health bar
 @export var move_speed: float = 60.0
 @export var can_move: bool = true            # chase the player (run animation)
 @export var attack_range: float = 40.0
@@ -40,10 +41,13 @@ var attack_count: int = 0
 @onready var health_bar: Node2D = $HealthBar
 @onready var hurt_sound: AudioStreamPlayer2D = get_node_or_null("HurtSound")
 @onready var death_sound: AudioStreamPlayer2D = get_node_or_null("DeathSound")
+@onready var block_sound: AudioStreamPlayer2D = get_node_or_null("BlockSound")
 
 func _ready() -> void:
 	health = max_health
 	add_to_group("enemies")
+	if invincible:
+		health_bar.visible = false
 
 func _physics_process(delta: float) -> void:
 	if not is_alive:
@@ -144,6 +148,13 @@ func take_damage(damage: int, attacker_position: Vector2) -> void:
 	if not is_alive:
 		return
 
+	# Invincible enemies shrug off the hit: play a "denied" cue instead of taking damage.
+	if invincible:
+		if block_sound and not block_sound.playing:
+			block_sound.play()
+		_flash_blocked()
+		return
+
 	health -= damage
 	health_bar.update_health(health)
 
@@ -166,6 +177,12 @@ func _flash() -> void:
 	sprite.modulate = Color(1.0, 0.4, 0.4)
 	var tween = create_tween()
 	tween.tween_property(sprite, "modulate", Color.WHITE, 0.25)
+
+# Blocked/invincible feedback: a grey flash (no red damage tint).
+func _flash_blocked() -> void:
+	sprite.modulate = Color(0.6, 0.6, 0.7)
+	var tween = create_tween()
+	tween.tween_property(sprite, "modulate", Color.WHITE, 0.2)
 
 func _drop_coins() -> void:
 	if coin_scene == null or gold_drop <= 0:
